@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Liste de tâches</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			background-color: #f7f7f7;
+			padding: 20px;
+		}
+		h1 {
+			text-align: center;
+			margin-top: 0;
+		}
+		.task-list {
+			list-style: none;
+			padding: 0;
+			margin: 20px 0;
+		}
+		.task {
+			display: flex;
+			align-items: center;
+			padding: 10px;
+			border-radius: 5px;
+			margin-bottom: 10px;
+			background-color: #fff;
+		}
+		.task .checkbox {
+			margin-right: 10px;
+		}
+		.task .title {
+			flex: 1;
+		}
+		.task .delete {
+			cursor: pointer;
+			color: red;
+			font-weight: bold;
+			font-size: 16px;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<h1>Liste de tâches</h1>
+
+	<form>
+		<label>
+			Ajouter une tâche :
+			<input type="text" id="new-task">
+		</label>
+		<button type="submit">Ajouter</button>
+	</form>
+
+	<ul class="task-list"></ul>
+
+	<script>
+		// Récupération des éléments HTML
+		const form = document.querySelector('form');
+		const taskList = document.querySelector('.task-list');
+		const newTaskInput = document.getElementById('new-task');
+
+		// Fonction pour ajouter une nouvelle tâche à la liste
+		function addTask(title) {
+			// Création des éléments HTML pour une tâche
+			const task = document.createElement('li');
+			task.classList.add('task');
+			const checkbox = document.createElement('input');
+			checkbox.type = 'checkbox';
+			checkbox.classList.add('checkbox');
+			const taskTitle = document.createElement('span');
+			taskTitle.classList.add('title');
+			taskTitle.innerText = title;
+			const deleteButton = document.createElement('button');
+			deleteButton.classList.add('delete');
+			deleteButton.innerText = 'X';
+
+			// Ajout des éléments à la tâche
+			task.appendChild(checkbox);
+			task.appendChild(taskTitle);
+			task.appendChild(deleteButton);
+
+			// Ajout de la tâche à la liste
+			taskList.appendChild(task);
+		}
+
+		// Fonction pour supprimer une tâche de la liste
+		function deleteTask(task) {
+			task.remove();
+		}
+
+		// Événement de soumission du formulaire pour ajouter une tâche
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+			const newTaskTitle = newTaskInput.value.trim();
+			if (newTaskTitle) {
+				addTask(newTaskTitle);
+				newTaskInput.value = '';
+			}
+		});
+
+		// Événement de clic sur le bouton de suppression d'une tâche
+		taskList.addEventListener('click', (event) => {
+			if (event.target.classList.contains('delete')) {
+				deleteTask(event.target.closest('.task'));
+			}
+		});
+	</script>
+</body>
+</html>
+
+<?php
+// Configuration de la base de données
+$servername = "localhost";
+$username = "nom_utilisateur
